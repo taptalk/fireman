@@ -124,7 +124,7 @@ describe('#loading', () => {
         .then(_ => should.exist(fireman.localDB.user))
         .then(_ => fireman.delete('/user'))
         .then(_ => should.not.exist(fireman.localDB.user))
-        .then(_ => fireman.load())
+        .then(_ => fireman.reload())
         .then(_ => should.exist(fireman.localDB.user))
     })
 })

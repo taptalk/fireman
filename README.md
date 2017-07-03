@@ -41,7 +41,7 @@ NB: *Make sure you first backup your Firebase database before using Fireman.* Fi
     fireman.put(['/user/abcd', '/usr/efgh'], { name: 'Romona Moten', age: 20 })
 
     // Reload local database from file
-    fireman.load()
+    fireman.reload()
     // Write local database to file
     fireman.save()
 
