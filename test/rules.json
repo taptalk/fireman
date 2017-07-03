@@ -1,0 +1,8 @@
+{
+    "user": {
+        ".indexOn": ".value"
+    },
+    "item": {
+        ".read": "auth !== null"
+    }
+}

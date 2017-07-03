@@ -8,13 +8,7 @@ const temp_filename = 'test/temp.json'
 // fireman.useLogger(console.log)
 
 beforeEach(() => {
-    // fs.createReadStream(db_filename).pipe(fs.createWriteStream(temp_filename));
     fireman.useLocalDB(db_filename)
-    // fireman.useLogger(console.log)
-})
-
-afterEach(() => {
-    // fs.unlinkSync(temp_filename)
 })
 
 describe('#get', () => {
@@ -121,6 +115,29 @@ describe('#delete', () => {
         .then(_ => fireman.delete('/user'))
         .then(_ => should.not.exist(fireman.localDB.user))
         .then(_ => should.exist(original.user))
+    })
+})
+
+describe('#loading', () => {
+    it('saves the database to file', () => {
+        Promise.resolve()
+        .then(_ => should.exist(fireman.localDB.user))
+        .then(_ => fireman.delete('/user'))
+        .then(_ => should.not.exist(fireman.localDB.user))
+        .then(_ => fireman.load())
+        .then(_ => should.exist(fireman.localDB.user))
+    })
+})
+
+describe('#saving', () => {
+    it('saves the database to file', () => {
+        return new Promise((resolve, reject) => fs.createReadStream(db_filename).on('error', reject).pipe(fs.createWriteStream(temp_filename).on('close', resolve).on('error', reject)))
+        .then(_ => fireman.useLocalDB(temp_filename))
+        .then(_ => fireman.put(['/user', '/item'], 'empty'))
+        .then(_ => fireman.save())
+        .then(_ => fs.readFileSync(temp_filename, 'utf8'))
+        .then(content => content.should.equal('{"user":"empty","item":"empty"}'))
+        .then(_ => fs.unlinkSync(temp_filename))
     })
 })
 
