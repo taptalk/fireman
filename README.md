@@ -87,3 +87,4 @@ Fireman is licensed under the terms of the BSD 3-Clause License, see the include
 ## Authors
 
 - Leo Vandriel
+- Onno Faber
