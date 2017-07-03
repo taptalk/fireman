@@ -71,7 +71,7 @@ Fireman has built-in support for managing database security and validation rules
     fireman.diffRules()
 
     // Update rules from file
-    fire.deployRules()
+    fireman.deployRules()
 
 
 ## Tests
