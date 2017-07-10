@@ -2,11 +2,19 @@
   "user": {
     "abcd": {
       "name": "Joshua Moreno",
-      "age": 85
+      "age": 85,
+      "stats": {
+        "visits": 22,
+        "type": "c"
+      }
     },
     "efgh": {
       "name": "Romona Moten",
-      "age": 20
+      "age": 20,
+      "stats": {
+        "visits": 13,
+        "type": "b"
+      }
     }
   },
   "item": {

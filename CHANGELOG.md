@@ -2,6 +2,7 @@ Change Log
 ==========
 
 ### master (untagged)
+* include support sub keys
 
 ### 0.0.1 (2017-07-02)
 

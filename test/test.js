@@ -13,7 +13,7 @@ beforeEach(() => {
 
 describe('#get', () => {
     it('fetches user', () => {
-        return fireman.get('/user/abcd').then(user => user.should.deep.equal({ name: 'Joshua Moreno', age: 85 }))
+        return fireman.get('/user/abcd').then(user => user.name.should.equal('Joshua Moreno'))
     })
 
     it('fetches users', () => {
@@ -55,6 +55,13 @@ describe('#get', () => {
     it('fetches shallow users', () => {
         return fireman.get('/user', { shallow: true }).then(users => Object.keys(users).should.deep.equal(['abcd', 'efgh']))
     })
+
+    it('fetch by sub key', () => {
+        return Promise.all([
+           fireman.get('/user', { orderBy: 'stats/visits', limitToLast: 1, startAt: 0 }).then(users => Object.keys(users).should.deep.equal(['abcd'])),
+           fireman.get('/user', { orderBy: 'stats/type', equalTo: 'c' }).then(users => Object.keys(users).should.deep.equal(['abcd'])),
+       ])
+    })
 })
 
 describe('#post', () => {
@@ -84,13 +91,19 @@ describe('#put', () => {
         .then(_ => fireman.localDB.user.abcd.name.should.equal('Fred Johnson'))
         .then(_ => original.user.abcd.name.should.equal('Joshua Moreno'))
     })
+
+    it('works without slash prefix', () => {
+        return fireman.put('test', { value: 'xyz' })
+        .then(result => result.should.deep.equal({ value: 'xyz' }))
+        .then(_ => fireman.localDB.test.should.deep.equal({ value: 'xyz' }))
+    })
 })
 
 describe('#patch', () => {
     it('updates user', () => {
         return fireman.patch('/user/abcd', { name: 'Nancy Oconnell' })
         .then(result => result.should.deep.equal({ name: 'Nancy Oconnell' }))
-        .then(_ => fireman.localDB.user.abcd.should.deep.equal({ name: 'Nancy Oconnell', age: 85 }))
+        .then(_ => fireman.localDB.user.abcd.name.should.deep.equal('Nancy Oconnell'))
     })
 
     it('does not affect the root data', () => {

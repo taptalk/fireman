@@ -35,7 +35,7 @@
     "test": "test"
   },
   "dependencies": {
-    "@leonardvandriel/flame": "^0.0.3",
+    "@leonardvandriel/flame": "^0.0.4",
     "axios": "^0.16.2"
   }
 }
