@@ -1,6 +1,6 @@
 {
   "name": "@leonardvandriel/fireman",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A wrapper around both a Firebase REST API and a local in-memory database.",
   "main": "lib/index.js",
   "scripts": {

@@ -3,6 +3,8 @@ Change Log
 
 ### master (untagged)\
 
+### 0.0.2 (2017-07-10)
+
 * include support sub keys
 * add pretty json to save
 * fix no slash prefix on firebase
