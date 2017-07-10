@@ -152,6 +152,16 @@ describe('#saving', () => {
         .then(content => content.should.equal('{"user":"empty","item":"empty"}'))
         .then(_ => fs.unlinkSync(temp_filename))
     })
+
+    it('saves with pretty formatting', () => {
+        return new Promise((resolve, reject) => fs.createReadStream(db_filename).on('error', reject).pipe(fs.createWriteStream(temp_filename).on('close', resolve).on('error', reject)))
+        .then(_ => fireman.useLocalDB(temp_filename))
+        .then(_ => fireman.put(['/user', '/item'], 'empty'))
+        .then(_ => fireman.save(true))
+        .then(_ => fs.readFileSync(temp_filename, 'utf8'))
+        .then(content => content.should.equal('{\n "user": "empty",\n "item": "empty"\n}'))
+        .then(_ => fs.unlinkSync(temp_filename))
+    })
 })
 
 describe('#generateKey', () => {

@@ -42,8 +42,8 @@ NB: *Make sure you first backup your Firebase database before using Fireman.* Fi
 
     // Reload local database from file
     fireman.reload()
-    // Write local database to file
-    fireman.save()
+    // Write local database to file (with pretty formatting)
+    fireman.save(true)
 
     // Download remote to local database
     fireman.sync()

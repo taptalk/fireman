@@ -1,7 +1,9 @@
 Change Log
 ==========
 
-### master (untagged)
+### master (untagged)\
+
+* add pretty json to save
 * include support sub keys
 
 ### 0.0.1 (2017-07-02)
