@@ -23,6 +23,8 @@ NB: *Make sure you first backup your Firebase database before using Fireman.* Fi
     fireman.useLocalDB('database.json')
     // or setup fireman to use remote database:
     fireman.useRemoteDB('<app-name>', '<api-key>')
+    // or use local ephemeral database (in-memory):
+    fireman.useLocalDB(null)
 
     // Read user
     console.log(fireman.get('/user/abcd'))

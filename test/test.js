@@ -123,7 +123,7 @@ describe('#delete', () => {
 
     it('does not affect the root data', () => {
         const original = fireman.localDB
-        Promise.resolve()
+        return Promise.resolve()
         .then(_ => should.exist(fireman.localDB.user))
         .then(_ => fireman.delete('/user'))
         .then(_ => should.not.exist(fireman.localDB.user))
@@ -133,7 +133,20 @@ describe('#delete', () => {
 
 describe('#loading', () => {
     it('saves the database to file', () => {
-        Promise.resolve()
+        return Promise.resolve()
+        .then(_ => should.exist(fireman.localDB.user))
+        .then(_ => fireman.delete('/user'))
+        .then(_ => should.not.exist(fireman.localDB.user))
+        .then(_ => fireman.reload())
+        .then(_ => should.exist(fireman.localDB.user))
+    })
+
+    it('saves the database to memory', () => {
+        const db = fireman.localDB
+        fireman.useLocalDB(null)
+        fireman.localDB = db
+        fireman.save()
+        return Promise.resolve()
         .then(_ => should.exist(fireman.localDB.user))
         .then(_ => fireman.delete('/user'))
         .then(_ => should.not.exist(fireman.localDB.user))
@@ -151,6 +164,14 @@ describe('#saving', () => {
         .then(_ => fs.readFileSync(temp_filename, 'utf8'))
         .then(content => content.should.equal('{"user":"empty","item":"empty"}'))
         .then(_ => fs.unlinkSync(temp_filename))
+    })
+
+    it('saves the database to memory', () => {
+        return Promise.resolve()
+        .then(_ => fireman.useLocalDB(null))
+        .then(_ => fireman.put(['/user', '/item'], 'empty'))
+        .then(_ => fireman.save())
+        .then(_ => fireman._in_mem_db.should.equal('{"user":"empty","item":"empty"}'))
     })
 
     it('saves with pretty formatting', () => {
