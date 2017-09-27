@@ -25,6 +25,7 @@ NB: *Make sure you first backup your Firebase database before using Fireman.* Fi
     fireman.useRemoteDB('<app-name>', '<api-key>')
     // or use local ephemeral database (in-memory):
     fireman.useLocalDB(null)
+    fireman.localDB = { "key": "value" }
 
     // Read user
     console.log(fireman.get('/user/abcd'))
@@ -35,7 +36,7 @@ NB: *Make sure you first backup your Firebase database before using Fireman.* Fi
     // Query users
     console.log(fireman.get('/user/abcd', { orderBy: 'age', limitToLast: 1, startAt: 10 }))
 
-    // Iterate users (50 per batch, 2 in parallel)
+    // Iterate over all users (50 per batch, 2 in parallel)
     this.iterate('/user', 50, 2, user => console.log(user))
 
     // Use multiple keys
@@ -58,6 +59,11 @@ NB: *Make sure you first backup your Firebase database before using Fireman.* Fi
 
     // Increment age by 10
     console.log(fireman.increment('/user/abcd', { age: 10 }))
+
+    // Generate unique firebase keys
+    fireman.keyForNow()
+    fireman.keyForTimestamp(1234567890)
+    fireman.timestampForKey('--08_VAHXMEfyLmXTYVm')
 
 ## Rules
 
