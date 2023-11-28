@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "@leonardvandriel/flame": "^0.0.4",
-    "axios": "^0.21.2"
+    "axios": "^1.6.0"
   }
 }
